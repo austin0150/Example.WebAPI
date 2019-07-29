@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Example.Business.Models
 {
-    class CapitalizeResponse
+    public class CapitalizeResponse
     {
-        private string modifiedString { get; set; }
-        private string originalString { get; set; }
+        public string modifiedString { get; set; }
+        public string originalString { get; set; }
     }
 }

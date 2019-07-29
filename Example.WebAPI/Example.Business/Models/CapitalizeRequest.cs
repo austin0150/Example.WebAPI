@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Example.Business.Models
 {
-    class CapitalizeRequest
+    public class CapitalizeRequest
     {
-        private string stringToModify { get; set; }
-        private bool trimTrainingWhiteSpace { get; set; }
-        private bool trimPrecedingWhiteSpave { get; set; }
-        private bool firstCharOnly { get; set; }
+        public string stringToModify { get; set; }
+        public bool trimTrainingWhiteSpace { get; set; }
+        public bool trimPrecedingWhiteSpave { get; set; }
+        public bool firstCharOnly { get; set; }
 
     }
 }
