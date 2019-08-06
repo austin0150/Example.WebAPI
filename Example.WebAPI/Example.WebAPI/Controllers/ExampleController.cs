@@ -28,9 +28,6 @@ namespace Example.WebAPI.Controllers
         public IActionResult CapitalizeControl ([FromBody] CapitalizeRequest request)
         {
 
-
-            //var request = JsonConvert.DeserializeObject<CapitalizeRequest>(requestBody);
-
             CapitalizeResponse capResonse;
 
             try
