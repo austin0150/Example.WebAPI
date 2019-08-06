@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Example.WebAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("Capitalize")]
     //[Consumes("application/json")]
     [ApiController]
     public class ExampleController : ControllerBase
@@ -27,10 +27,7 @@ namespace Example.WebAPI.Controllers
         [HttpGet]
         public IActionResult CapitalizeControl ([FromBody] CapitalizeRequest request)
         {
-            if(request.stringToModify == null)
-            {
-                return StatusCode(500, "String to Modify cannot be null");
-            }
+
 
             //var request = JsonConvert.DeserializeObject<CapitalizeRequest>(requestBody);
 
@@ -38,11 +35,12 @@ namespace Example.WebAPI.Controllers
 
             try
             {
+                _cap.ValidateRequest(request);
                 capResonse = _cap.ProccessRequest(request);
             }
             catch(Exception e)
             {
-                return StatusCode(500, e.Message + " --- " + e.StackTrace);
+                return StatusCode(500, e.Message);
             }
 
             return StatusCode(200, capResonse);

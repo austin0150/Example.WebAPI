@@ -8,7 +8,7 @@ namespace Example.Business.Interfaces
     public interface ICapitalize
     {
         CapitalizeResponse ProccessRequest(CapitalizeRequest request);
-
+        void ValidateRequest(CapitalizeRequest request);
 
     }
 }
