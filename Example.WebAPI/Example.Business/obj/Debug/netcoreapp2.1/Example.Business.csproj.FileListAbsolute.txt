@@ -1,7 +1,6 @@
 D:\Git\Example-API\Example.WebAPI\Example.Business\bin\Debug\netcoreapp2.1\Example.Business.deps.json
 D:\Git\Example-API\Example.WebAPI\Example.Business\bin\Debug\netcoreapp2.1\Example.Business.dll
 D:\Git\Example-API\Example.WebAPI\Example.Business\bin\Debug\netcoreapp2.1\Example.Business.pdb
-D:\Git\Example-API\Example.WebAPI\Example.Business\obj\Debug\netcoreapp2.1\Example.Business.csprojAssemblyReference.cache
 D:\Git\Example-API\Example.WebAPI\Example.Business\obj\Debug\netcoreapp2.1\Example.Business.csproj.CoreCompileInputs.cache
 D:\Git\Example-API\Example.WebAPI\Example.Business\obj\Debug\netcoreapp2.1\Example.Business.AssemblyInfoInputs.cache
 D:\Git\Example-API\Example.WebAPI\Example.Business\obj\Debug\netcoreapp2.1\Example.Business.AssemblyInfo.cs
