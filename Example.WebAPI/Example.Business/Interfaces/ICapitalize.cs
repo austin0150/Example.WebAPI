@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Example.Business.Interfaces
 {
-    interface ICapitalize
+    public interface ICapitalize
     {
-        string ProccessString(CapitalizeRequest request);
+        CapitalizeResponse ProccessRequest(CapitalizeRequest request);
 
 
     }

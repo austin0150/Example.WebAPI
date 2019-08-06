@@ -6,18 +6,45 @@ using System.Text;
 
 namespace Example.Business
 {
-    class Capitalize : ICapitalize
+    public class Capitalize : ICapitalize
     {
-        public string ProccessString(CapitalizeRequest request)
+
+        public CapitalizeResponse ProccessRequest(CapitalizeRequest request)
         {
-            string modifiedString ="";
-            if(string.IsNullOrEmpty(request.stringToModify))
+            CapitalizeResponse response = new CapitalizeResponse();
+            response.originalString = request.stringToModify;
+
+            string firstChar;
+            string stringInProgress = request.stringToModify;
+
+            if(request.trimPrecedingWhiteSpave)
             {
-                throw new Exception("Input String Cannot be empty");
+                response.modifiedString = stringInProgress.Trim();
+            }
+            else if(request.trimTrainingWhiteSpace)
+            {
+                stringInProgress.TrimEnd();
+            }
+            else if(request.trimPrecedingWhiteSpave && request.trimTrainingWhiteSpace)
+            {
+                stringInProgress.TrimStart();
             }
 
-            return modifiedString;
-        }
+            if(request.firstCharOnly)
+            {
+                firstChar = stringInProgress.Substring(0, 0);
+                firstChar.ToUpper();
+                stringInProgress.Remove(0, 0);
+                stringInProgress = firstChar + stringInProgress;
+            }
+            else
+            {
+                stringInProgress = stringInProgress.ToUpper();
+            }
 
+            response.modifiedString = stringInProgress;
+
+            return response;
+        }
     }
 }

@@ -12,3 +12,6 @@ D:\Git\Example-API\Example.WebAPI\Example.WebAPI\obj\Debug\netcoreapp2.1\Example
 D:\Git\Example-API\Example.WebAPI\Example.WebAPI\bin\Debug\netcoreapp2.1\Example.WebAPI.pdb
 D:\Git\Example-API\Example.WebAPI\Example.WebAPI\obj\Debug\netcoreapp2.1\Example.WebAPI.dll
 D:\Git\Example-API\Example.WebAPI\Example.WebAPI\obj\Debug\netcoreapp2.1\Example.WebAPI.pdb
+D:\Git\Example-API\Example.WebAPI\Example.WebAPI\bin\Debug\netcoreapp2.1\Example.Business.dll
+D:\Git\Example-API\Example.WebAPI\Example.WebAPI\bin\Debug\netcoreapp2.1\Example.Business.pdb
+D:\Git\Example-API\Example.WebAPI\Example.WebAPI\obj\Debug\netcoreapp2.1\Example.WebAPI.csproj.CopyComplete
