@@ -19,15 +19,11 @@ namespace Example.Business
 
             if(request.trimPrecedingWhiteSpave)
             {
-                response.modifiedString = stringInProgress.Trim();
+                stringInProgress = stringInProgress.TrimStart();
             }
-            else if(request.trimTrainingWhiteSpace)
+            if(request.trimTrainingWhiteSpace)
             {
-                stringInProgress.TrimEnd();
-            }
-            else if(request.trimPrecedingWhiteSpave && request.trimTrainingWhiteSpace)
-            {
-                stringInProgress.TrimStart();
+                stringInProgress = stringInProgress.TrimEnd();
             }
 
             if(request.firstCharOnly)
