@@ -11,7 +11,7 @@
 ### Add this to your request body...
 '''
 {
-    "stringToModify" : " this is a string   ",
+	"stringToModify" : " this is a string   ",
     "trimTrailingWhiteSpace" : true,
     "trimPrecedingWhiteSpace" : true,
     "firstCharOnly" : true
