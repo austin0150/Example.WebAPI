@@ -9,7 +9,6 @@
 ### Get Postman here : https://www.getpostman.com/
 ### Send a GET to this url "https://localhost:44346/Capitalize" (You may need to change the port in the url if this doesn't work for you)
 ### Add this to your request body...
-
 '''
 {
     "stringToModify" : " this is a string   ",
