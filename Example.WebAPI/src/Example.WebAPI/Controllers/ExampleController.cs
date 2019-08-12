@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace Example.WebAPI.Controllers
 {
     [Route("Capitalize")]
-    //[Consumes("application/json")]
+    [Consumes("application/json")]
     [ApiController]
     public class ExampleController : ControllerBase
     {

@@ -15,4 +15,5 @@
         "trimPrecedingWhiteSpace" : true,
         "firstCharOnly" : true
     }
+### Make sure the content type you are sending is JSON(application/json)
 
