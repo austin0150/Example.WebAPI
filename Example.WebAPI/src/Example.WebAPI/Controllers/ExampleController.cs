@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 
 namespace Example.WebAPI.Controllers
 {
-    [Route("Capitalize")]
     [Consumes("application/json")]
     [ApiController]
     public class ExampleController : ControllerBase
@@ -25,6 +24,7 @@ namespace Example.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("Capitalize")]
         public IActionResult CapitalizeControl ([FromBody] CapitalizeRequest request)
         {
 
