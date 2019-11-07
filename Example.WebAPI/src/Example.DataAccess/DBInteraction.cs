@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Example.DataAccess
 {
-    class DBInteraction
+    public class DBInteraction
     {
         public string connString;
 

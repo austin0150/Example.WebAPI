@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Example.Business;
+using Example.DataAccess;
 
 namespace Example.WebAPI
 {
@@ -30,6 +31,7 @@ namespace Example.WebAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<ICapitalize, Capitalize>();
+            services.AddSingleton<DBInteraction>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
