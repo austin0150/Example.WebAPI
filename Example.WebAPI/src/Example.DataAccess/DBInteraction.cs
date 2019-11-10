@@ -30,7 +30,7 @@ namespace Example.DataAccess
             return new SqlConnection();
         }
 
-        int GetWordUse(string word)
+        public int GetWordUse(string word)
         {
             string queryString = "SELECT USES FROM WORD_USE WHERE WORD = \'" + word + "\';";
             SqlConnection sqlConn = ConnectToDB();
@@ -49,7 +49,7 @@ namespace Example.DataAccess
             return count;
         }
 
-        int GetCharUse(char character)
+        public int GetCharUse(char character)
         {
             string queryString = "SELECT USES FROM CHAR_USE WHERE Letter = \'" + character + "\';";
             SqlConnection sqlConn = ConnectToDB();

@@ -9,6 +9,7 @@ using Example.Business.Models;
 using Example.Business.Interfaces;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Example.DataAccess;
 
 namespace Example.WebAPI.Controllers
 {
@@ -17,10 +18,12 @@ namespace Example.WebAPI.Controllers
     public class ExampleController : ControllerBase
     {
         ICapitalize _cap;
+        DBInteraction _DB;
 
-        public ExampleController(ICapitalize cap)
+        public ExampleController(ICapitalize cap, DBInteraction db)
         {
             _cap = cap;
+            _DB = db;
         }
 
         [HttpGet]
@@ -42,6 +45,38 @@ namespace Example.WebAPI.Controllers
 
             return StatusCode(200, capResonse);
             
+        }
+
+        [HttpGet]
+        [Route("CharStat")]
+        public IActionResult CharStatControl([FromBody] char character)
+        {
+            int numChars;
+            try
+            {
+                numChars = _DB.GetCharUse(character);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            return StatusCode(200, numChars);
+        }
+
+        [HttpGet]
+        [Route("WordStat")]
+        public IActionResult WordStatControl([FromBody] string word)
+        {
+            int numWords;
+            try
+            {
+                numWords = _DB.GetWordUse(word);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            return StatusCode(200, numWords);
         }
 
     }
