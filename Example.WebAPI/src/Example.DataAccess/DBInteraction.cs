@@ -32,12 +32,40 @@ namespace Example.DataAccess
 
         int GetWordUse(string word)
         {
-            return 0;
+            string queryString = "SELECT USES FROM WORD_USE WHERE WORD = \'" + word + "\';";
+            SqlConnection sqlConn = ConnectToDB();
+            SqlCommand command = new SqlCommand(queryString, sqlConn);
+
+            sqlConn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+
+           string result = reader.GetString(1);
+
+            int count = Convert.ToInt32(result);
+
+            return count;
         }
 
         int GetCharUse(char character)
         {
-            return 0;
+            string queryString = "SELECT USES FROM CHAR_USE WHERE Letter = \'" + character + "\';";
+            SqlConnection sqlConn = ConnectToDB();
+            SqlCommand command = new SqlCommand(queryString, sqlConn);
+
+            sqlConn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+
+            string result = reader.GetString(1);
+
+            int count = Convert.ToInt32(result);
+
+            return count;
         }
     }
 }
