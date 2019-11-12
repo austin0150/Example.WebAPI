@@ -18,9 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Example.DataAccess\Example.DataAccess.csproj" />
-    <ProjectReference Include="..\Example.Business\Example.Business.csproj" />
     <ProjectReference Include="..\Example.DataAccess\Example.DataAccess.csproj" />
+    <ProjectReference Include="..\Example.Business\Example.Business.csproj" />
   </ItemGroup>
 
 </Project>

@@ -65,16 +65,16 @@ namespace Example.WebAPI.Controllers
 
         [HttpGet]
         [Route("WordStat")]
-        public IActionResult WordStatControl([FromBody] string word)
+        public IActionResult WordStatControl([FromBody] WordStatRequest wordRequest)
         {
             int numWords;
             try
             {
-                numWords = _DB.GetWordUse(word);
+                numWords = _DB.GetWordUse(wordRequest.word);
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                return StatusCode(500, e.Message + " -- " + e.StackTrace);
             }
             return StatusCode(200, numWords);
         }

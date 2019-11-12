@@ -27,7 +27,9 @@ namespace Example.DataAccess
 
         SqlConnection ConnectToDB()
         {
-            return new SqlConnection();
+            string connString = DBConfig.ParseConfigFile("apidb");
+
+            return new SqlConnection(connString);
         }
 
         public int GetWordUse(string word)
@@ -42,9 +44,11 @@ namespace Example.DataAccess
 
             reader.Read();
 
-           string result = reader.GetString(1);
+            int count = reader.GetInt32(0);
 
-            int count = Convert.ToInt32(result);
+            //int count = Convert.ToInt32(result);
+
+            sqlConn.Close();
 
             return count;
         }
