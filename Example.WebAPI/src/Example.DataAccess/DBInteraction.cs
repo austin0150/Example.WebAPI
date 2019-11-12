@@ -46,8 +46,6 @@ namespace Example.DataAccess
 
             int count = reader.GetInt32(0);
 
-            //int count = Convert.ToInt32(result);
-
             sqlConn.Close();
 
             return count;
@@ -65,9 +63,7 @@ namespace Example.DataAccess
 
             reader.Read();
 
-            string result = reader.GetString(1);
-
-            int count = Convert.ToInt32(result);
+            int count = reader.GetInt32(0);
 
             return count;
         }
