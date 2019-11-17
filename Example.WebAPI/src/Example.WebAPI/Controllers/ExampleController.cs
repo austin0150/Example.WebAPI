@@ -30,7 +30,6 @@ namespace Example.WebAPI.Controllers
         [Route("Capitalize")]
         public IActionResult CapitalizeControl ([FromBody] CapitalizeRequest request)
         {
-            List<string> wordList;
             CapitalizeResponse capResonse;
 
             try
@@ -48,7 +47,7 @@ namespace Example.WebAPI.Controllers
             }
             catch(Exception e)
             {
-                return StatusCode(500, e.Message + e.StackTrace);
+                return StatusCode(500, e.Message);
             }
 
             return StatusCode(200, capResonse);
