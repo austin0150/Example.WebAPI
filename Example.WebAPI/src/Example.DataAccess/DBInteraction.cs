@@ -9,11 +9,68 @@ namespace Example.DataAccess
     {
         public string connString;
 
-        void AddUsedWord(string word)
-        { }
+        public DBInteraction()
+        {
+            connString = DBConfig.ParseConfigFile("apidb");
+        }
+
+        public void AddUsedWord(string word)
+        {
+            for(int i = 0; i < word.Length; i++)
+            {
+                AddUsedChar(word[i]);
+            }
+
+            int preCount = GetWordUse(word);
+            string cmdString = "";
+
+            if(preCount > 0)
+            {
+                cmdString = "UPDATE WORD_USE SET USES = " + (preCount + 1) + " WHERE WORD = \'" + word +"\';";
+            }
+            else
+            {
+                cmdString = "INSERT INTO WORD_USE (WORD, USES) VALUES (\'" + word + "\', 1)";
+            }
+
+            SqlConnection conn = ConnectToDB();
+
+            SqlCommand cmd = new SqlCommand(cmdString, conn);
+
+
+            conn.Open();
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+        }
 
         void AddUsedChar(char character)
-        { }
+        {
+            int preCount = GetCharUse(character);
+            string cmdString = "";
+
+            if (preCount > 0)
+            {
+                cmdString = "UPDATE CHAR_USE SET USES = " + (preCount + 1) + " WHERE LETTER = \'" + character + "\';";
+            }
+            else
+            {
+                cmdString = "INSERT INTO CHAR_USE (LETTER, USES) VALUES (\'" + character + "\', 1)";
+            }
+
+            SqlConnection conn = ConnectToDB();
+
+            SqlCommand cmd = new SqlCommand(cmdString, conn);
+
+            conn.Open();
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            return;
+ 
+        }
 
         string FilterUnsavvy(string word)
         {
@@ -27,8 +84,6 @@ namespace Example.DataAccess
 
         SqlConnection ConnectToDB()
         {
-            string connString = DBConfig.ParseConfigFile("apidb");
-
             return new SqlConnection(connString);
         }
 
@@ -42,13 +97,21 @@ namespace Example.DataAccess
 
             SqlDataReader reader = command.ExecuteReader();
 
-            reader.Read();
+            if(reader.HasRows)
+            {
+                reader.Read();
 
-            int count = reader.GetInt32(0);
+                int count = reader.GetInt32(0);
 
-            sqlConn.Close();
+                sqlConn.Close();
 
-            return count;
+                return count;
+            }
+            else
+            {
+                return 0;
+            }
+            
         }
 
         public int GetCharUse(char character)
@@ -61,11 +124,21 @@ namespace Example.DataAccess
 
             SqlDataReader reader = command.ExecuteReader();
 
-            reader.Read();
+            if (reader.HasRows)
+            {
+                reader.Read();
 
-            int count = reader.GetInt32(0);
+                int count = reader.GetInt32(0);
 
-            return count;
+                sqlConn.Close();
+
+                return count;
+            }
+            else
+            {
+                sqlConn.Close();
+                return 0;
+            }
         }
     }
 }

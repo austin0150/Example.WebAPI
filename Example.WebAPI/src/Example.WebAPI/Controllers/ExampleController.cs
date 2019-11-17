@@ -30,17 +30,25 @@ namespace Example.WebAPI.Controllers
         [Route("Capitalize")]
         public IActionResult CapitalizeControl ([FromBody] CapitalizeRequest request)
         {
-
+            List<string> wordList;
             CapitalizeResponse capResonse;
 
             try
             {
                 _cap.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
+                
                 capResonse = _cap.ProccessRequest(request);
             }
             catch(Exception e)
             {
-                return StatusCode(500, e.Message);
+                return StatusCode(500, e.Message + e.StackTrace);
             }
 
             return StatusCode(200, capResonse);
@@ -74,7 +82,7 @@ namespace Example.WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message + " -- " + e.StackTrace);
+                return StatusCode(500, e.Message);
             }
             return StatusCode(200, numWords);
         }

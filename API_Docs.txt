@@ -1,4 +1,0 @@
-API Documentation
-
-*** Capitalize ***
-Takes application/JSON data type
