@@ -45,7 +45,7 @@ namespace Example.DataAccess
 
         }
 
-        void AddUsedChar(char character)
+        public void AddUsedChar(char character)
         {
             int preCount = GetCharUse(character);
             string cmdString = "";

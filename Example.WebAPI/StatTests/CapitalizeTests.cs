@@ -4,11 +4,10 @@ using System.Text;
 using NUnit.Framework;
 using Example.Business;
 using Example.Business.Models;
-using NUnit.Framework.Constraints;
 
 namespace StatTests
 {
-    [TestFixture]
+    //[TestFixture]
     class CapitalizeTests
     {
         private CapitalizeRequest request;
