@@ -9,11 +9,68 @@ namespace Example.DataAccess
     {
         public string connString;
 
-        void AddUsedWord(string word)
-        { }
+        public DBInteraction()
+        {
+            connString = DBConfig.ParseConfigFile("apidb");
+        }
 
-        void AddUsedChar(char character)
-        { }
+        public void AddUsedWord(string word)
+        {
+            for(int i = 0; i < word.Length; i++)
+            {
+                AddUsedChar(word[i]);
+            }
+
+            int preCount = GetWordUse(word);
+            string cmdString = "";
+
+            if(preCount > 0)
+            {
+                cmdString = "UPDATE WORD_USE SET USES = " + (preCount + 1) + " WHERE WORD = \'" + word +"\';";
+            }
+            else
+            {
+                cmdString = "INSERT INTO WORD_USE (WORD, USES) VALUES (\'" + word + "\', 1)";
+            }
+
+            SqlConnection conn = ConnectToDB();
+
+            SqlCommand cmd = new SqlCommand(cmdString, conn);
+
+
+            conn.Open();
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+        }
+
+        public void AddUsedChar(char character)
+        {
+            int preCount = GetCharUse(character);
+            string cmdString = "";
+
+            if (preCount > 0)
+            {
+                cmdString = "UPDATE CHAR_USE SET USES = " + (preCount + 1) + " WHERE LETTER = \'" + character + "\';";
+            }
+            else
+            {
+                cmdString = "INSERT INTO CHAR_USE (LETTER, USES) VALUES (\'" + character + "\', 1)";
+            }
+
+            SqlConnection conn = ConnectToDB();
+
+            SqlCommand cmd = new SqlCommand(cmdString, conn);
+
+            conn.Open();
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            return;
+ 
+        }
 
         string FilterUnsavvy(string word)
         {
@@ -27,17 +84,61 @@ namespace Example.DataAccess
 
         SqlConnection ConnectToDB()
         {
-            return new SqlConnection();
+            return new SqlConnection(connString);
         }
 
-        int GetWordUse(string word)
+        public int GetWordUse(string word)
         {
-            return 0;
+            string queryString = "SELECT USES FROM WORD_USE WHERE WORD = \'" + word + "\';";
+            SqlConnection sqlConn = ConnectToDB();
+            SqlCommand command = new SqlCommand(queryString, sqlConn);
+
+            sqlConn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if(reader.HasRows)
+            {
+                reader.Read();
+
+                int count = reader.GetInt32(0);
+
+                sqlConn.Close();
+
+                return count;
+            }
+            else
+            {
+                return 0;
+            }
+            
         }
 
-        int GetCharUse(char character)
+        public int GetCharUse(char character)
         {
-            return 0;
+            string queryString = "SELECT USES FROM CHAR_USE WHERE Letter = \'" + character + "\';";
+            SqlConnection sqlConn = ConnectToDB();
+            SqlCommand command = new SqlCommand(queryString, sqlConn);
+
+            sqlConn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                reader.Read();
+
+                int count = reader.GetInt32(0);
+
+                sqlConn.Close();
+
+                return count;
+            }
+            else
+            {
+                sqlConn.Close();
+                return 0;
+            }
         }
     }
 }

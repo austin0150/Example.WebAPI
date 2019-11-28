@@ -3,6 +3,9 @@
 ## Just a basic example of an ASP .NET Core Web API
 ### I just wanted to make something like this for my own practice.
 
+### Please reference the API documentation for info on all the API functions here...
+### https://documenter.getpostman.com/view/9459391/SW7Uaphp?version=latest
+
 ### Runs on ASP Net Core 2.2 and Can be run in a docker container (Once I set that up) 
 
 ### Once you run the service, you can test it out using postman
