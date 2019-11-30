@@ -29,14 +29,15 @@ namespace Example.Business {
                 if (changeString.Length >= 1) {
                     char changeStringChar = changeString[0];
                     changeStringChar = Char.ToLower(changeStringChar);
-                    changeString.Remove(0);
-                    changeString.Insert(0, "changeStringChar.ToString()");
+                    changeString = changeString.Remove(0, 1);
+                    changeString = changeString.Insert(0, changeStringChar.ToString());
                 }
                 
                 for (int x = 0; x < count; x++)
                 {
                     //reinsert white spaces
-                    changeString.Insert(0, " ");
+                    changeString = changeString.Insert(0, " ");
+                    //changeString = " " + changeString;
                 }
             }
             else {
