@@ -1,0 +1,5 @@
+# File containg the DB configs
+DataSource : '192.168.2.10,1433'
+InitCatalog : 'apidb'
+User : 'SA'
+Pass : 'Cis376db!'
