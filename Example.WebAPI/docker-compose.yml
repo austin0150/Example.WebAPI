@@ -6,7 +6,6 @@ services:
     container_name: CIS376WebAPI
     ports:
       - 5010:80
-      - 3306:3306
     build:
       context: ./
       dockerfile: Dockerfile
