@@ -100,5 +100,35 @@ using System;
              //assert
              Assert.AreEqual("tEST STRING", response.modifiedString);
          }
+
+        [Test]
+         public void ProcessRequestFirstCharWhiteSpace() {
+             //arrange
+             request.stringToModify = "               Test string";
+             request.firstCharOnly = true;
+             request.trimPrecedingWhiteSpace = true;
+             request.trimTrailingWhiteSpace = false;
+
+             //act
+             response = cap.ProcessRequest(request);
+
+             //assert
+             Assert.AreEqual("test string", response.modifiedString);
+         }
+
+        [Test]
+         public void ProcessRequestAll() {
+             //arrange
+             request.stringToModify = "               Test string                 ";
+             request.firstCharOnly = true;
+             request.trimPrecedingWhiteSpace = true;
+             request.trimTrailingWhiteSpace = true;
+
+             //act
+             response = cap.ProcessRequest(request);
+
+             //assert
+             Assert.AreEqual("test string", response.modifiedString);
+         }
      }
  }

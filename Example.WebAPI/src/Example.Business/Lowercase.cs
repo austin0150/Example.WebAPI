@@ -3,6 +3,7 @@ using Example.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Example.DataAccess;
 
 namespace Example.Business {
     public class Lowercase : ILowercase {
@@ -10,7 +11,18 @@ namespace Example.Business {
             LowercaseResponse response = new LowercaseResponse();
             HelperFunctions helper = new HelperFunctions();
 
+            DBInteraction interaction = new DBInteraction();
             String changeString = request.stringToModify;
+
+            // //Store database Metrics
+            // String[] dbArray = changeString.Split(".");
+            // foreach (String sentence in dbArray) {
+            //     String[] word = sentence.Split(" ");
+            //     foreach (String wordVal in word) {
+            //         interaction.AddUsedWord(wordVal.ToLower());
+            //     }
+            // }
+
             if (request.firstCharOnly) {
                 int count = 0;
                 //Find the total amount of white spaces
