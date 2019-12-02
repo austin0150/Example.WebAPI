@@ -16,6 +16,9 @@ namespace Example.DataAccess
 
         public void AddUsedWord(string word)
         {
+            //Convert everything to uppercase first
+            word = word.ToUpper();
+
             for(int i = 0; i < word.Length; i++)
             {
                 AddUsedChar(word[i]);
@@ -47,7 +50,7 @@ namespace Example.DataAccess
 
         public void AddUsedChar(char character)
         {
-            int preCount = GetCharUse(character);
+            int preCount = GetCharUse(character) ;
             string cmdString = "";
 
             if (preCount > 0)
@@ -89,6 +92,9 @@ namespace Example.DataAccess
 
         public int GetWordUse(string word)
         {
+            //convert to upper case
+            word = word.ToUpper();
+
             string queryString = "SELECT USES FROM WORD_USE WHERE WORD = \'" + word + "\';";
             SqlConnection sqlConn = ConnectToDB();
             SqlCommand command = new SqlCommand(queryString, sqlConn);
@@ -116,6 +122,7 @@ namespace Example.DataAccess
 
         public int GetCharUse(char character)
         {
+            character = char.ToUpper(character);
             string queryString = "SELECT USES FROM CHAR_USE WHERE Letter = \'" + character + "\';";
             SqlConnection sqlConn = ConnectToDB();
             SqlCommand command = new SqlCommand(queryString, sqlConn);
