@@ -19,11 +19,13 @@ namespace Example.WebAPI.Controllers
     {
         ICapitalize _cap;
         DBInteraction _DB;
+        ILowercase _low;
 
-        public ExampleController(ICapitalize cap, DBInteraction db)
+        public ExampleController(ICapitalize cap, DBInteraction db, ILowercase low)
         {
             _cap = cap;
             _DB = db;
+            _low = low;
         }
 
         [HttpGet]
@@ -84,6 +86,33 @@ namespace Example.WebAPI.Controllers
                 return StatusCode(500, e.Message);
             }
             return StatusCode(200, numWords);
+        }
+
+        [HttpGet]
+        [Route("Lowercase")]
+        public IActionResult LowercaseControl([FromBody] LowercaseRequest lowercaseRequest)
+        {
+            LowercaseResponse lowResponse;
+
+            try
+            {
+                _low.ValidateRequest(lowercaseRequest);
+                string[] words = lowercaseRequest.stringToModify.Split(' ');
+
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
+                
+                lowResponse = _low.ProcessRequest(lowercaseRequest);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, lowResponse);
         }
 
     }
