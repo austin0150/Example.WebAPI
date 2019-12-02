@@ -50,7 +50,7 @@ namespace Example.DataAccess
 
         public void AddUsedChar(char character)
         {
-            int preCount = GetCharUse(character.ToString()) ;
+            int preCount = GetCharUse(character) ;
             string cmdString = "";
 
             if (preCount > 0)
@@ -120,10 +120,9 @@ namespace Example.DataAccess
             
         }
 
-        public int GetCharUse(string character)
+        public int GetCharUse(char character)
         {
-            character = character.ToUpper();
-
+            character = char.ToUpper(character);
             string queryString = "SELECT USES FROM CHAR_USE WHERE Letter = \'" + character + "\';";
             SqlConnection sqlConn = ConnectToDB();
             SqlCommand command = new SqlCommand(queryString, sqlConn);

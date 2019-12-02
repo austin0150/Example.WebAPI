@@ -72,12 +72,12 @@ namespace Example.WebAPI.Controllers
 
         [HttpGet]
         [Route("WordStat")]
-        public IActionResult WordStatControl([FromBody] WordStatRequest wordRequest)
+        public IActionResult WordStatControl([FromBody] string word)
         {
             int numWords;
             try
             {
-                numWords = _DB.GetWordUse(wordRequest.word);
+                numWords = _DB.GetWordUse(word);
             }
             catch (Exception e)
             {
