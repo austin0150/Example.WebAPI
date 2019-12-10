@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  cis376api:
-    image: cis376api
+  CIS376WebAPI:
+    image: CIS376WebAPI
     container_name: CIS376WebAPI
     ports:
       - 5010:80
