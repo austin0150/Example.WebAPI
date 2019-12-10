@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Example.Business;
@@ -21,6 +22,8 @@ namespace Example.WebAPI.Controllers
         DBInteraction _DB;
         ILowercase _low;
 
+        ControllerHelperFunctions helper;
+
         public ExampleController(ICapitalize cap, DBInteraction db, ILowercase low)
         {
             _cap = cap;
@@ -39,11 +42,13 @@ namespace Example.WebAPI.Controllers
                 _cap.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                //Persist word/char stats
-                for (int i = 0; i < words.Length; i++)
-                {
-                    _DB.AddUsedWord(words[i]);
-                }
+                // //Persist word/char stats
+                // for (int i = 0; i < words.Length; i++)
+                // {
+                //     _DB.AddUsedWord(words[i]);
+                // }
+                Thread thread1 = new Thread(()=>ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
                 
                 capResonse = _cap.ProccessRequest(request);
             }
@@ -99,12 +104,15 @@ namespace Example.WebAPI.Controllers
                 _low.ValidateRequest(lowercaseRequest);
                 string[] words = lowercaseRequest.stringToModify.Split(' ');
 
-                //Persist word/char stats
-                for (int i = 0; i < words.Length; i++)
-                {
-                    _DB.AddUsedWord(words[i]);
-                }
-                
+                // //Persist word/char stats
+                // for (int i = 0; i < words.Length; i++)
+                // {
+                //     ThreadStart thread1 = delegate {_DB.AddUsedWord(words[i]); };
+                //     //_DB.AddUsedWord(words[i]);
+                // }
+                Thread thread1 = new Thread(()=>ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
                 lowResponse = _low.ProcessRequest(lowercaseRequest);
             }
             catch(Exception e)
