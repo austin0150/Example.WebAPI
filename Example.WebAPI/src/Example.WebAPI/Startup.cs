@@ -33,6 +33,7 @@ namespace Example.WebAPI
             services.AddSingleton<ICapitalize, Capitalize>();
             services.AddSingleton<DBInteraction>();
             services.AddSingleton<ILowercase, Lowercase>();
+            services.AddSingleton<IBinary, Binary>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -25,18 +25,19 @@ namespace Example.WebAPI.Controllers
 
         ControllerHelperFunctions helper;
 
-        public ExampleController(ICapitalize cap, DBInteraction db, ILowercase low)
+        public ExampleController(ICapitalize cap, DBInteraction db, ILowercase low, IBinary bin)
         {
             _cap = cap;
             _DB = db;
             _low = low;
+            _bin = bin;
         }
 
-        public ExampleController(IBinary bin, DBInteraction db)
-        {
-            _bin = bin;
-            _DB = db;
-        }
+        // public ExampleController(IBinary bin, DBInteraction db)
+        // {
+        //     _bin = bin;
+        //     _DB = db;
+        // }
 
         [HttpGet]
         [Route("Capitalize")]
