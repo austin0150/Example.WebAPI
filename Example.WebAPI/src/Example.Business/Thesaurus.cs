@@ -24,6 +24,19 @@ namespace Example.Business
             return response;
         }
 
+        public ThesaurusResponse ProcessRequest(ThesaurusRequest request, LinkedList<string[]> thesaurusList)
+        {
+
+            string newString = StringParser.generateNewString(request.stringToModify, thesaurusList);
+
+            ThesaurusResponse response = new ThesaurusResponse
+            {
+                originalString = newString
+            };
+
+            return response;
+        }
+
         public void ValidateRequest(ThesaurusRequest request)
         {
             if (request.stringToModify.Length == 0)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Example.Business.Models
 {
-    class FilterResponse
+    public class FilterResponse
     {
         public string modifiedString { get; set; }
         public string originalString { get; set; }

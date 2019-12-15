@@ -8,12 +8,25 @@ using System.Text;
 
 namespace Example.Business
 {
-    class Filter : IFilter
+    public class Filter : IFilter
     {
         public FilterResponse ProcessRequest(FilterRequest request)
         {
 
             string newString = StringParser.generateNewString(request.stringToModify, "filter");
+
+            FilterResponse response = new FilterResponse
+            {
+                originalString = newString
+            };
+
+            return response;
+        }
+
+        public FilterResponse ProcessRequest(FilterRequest request, LinkedList<string[]> filterList)
+        {
+
+            string newString = StringParser.generateNewString(request.stringToModify, filterList);
 
             FilterResponse response = new FilterResponse
             {

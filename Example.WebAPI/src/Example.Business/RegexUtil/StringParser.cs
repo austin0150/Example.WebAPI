@@ -12,13 +12,18 @@ namespace Example.Business.RegexUtil
         {
             DBInteraction dbi = new DBInteraction();
 
+            return generateNewString(inputString, dbi.getTable("tableName"));
+        }
+
+        public static String generateNewString(String inputString, LinkedList<string[]> stringTable)
+        {
             Regex regex;
             Random random = new Random();
 
             string outputString = inputString.ToLower();
             int randomNumber = 1;
 
-            foreach(string[] stringArray in dbi.getTable(tableName))
+            foreach (string[] stringArray in stringTable)
             {
                 regex = new Regex(stringArray[0]);
                 while (regex.IsMatch("(?s).*" + stringArray[0] + ".*"))
@@ -26,9 +31,10 @@ namespace Example.Business.RegexUtil
                     randomNumber = random.Next(4);
                     regex.Replace(outputString, stringArray[randomNumber], 1, 0);
                 }
-
             }
+
             return outputString;
+
         }
     }
 }
