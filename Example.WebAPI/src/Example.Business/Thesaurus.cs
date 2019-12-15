@@ -31,7 +31,8 @@ namespace Example.Business
 
             ThesaurusResponse response = new ThesaurusResponse
             {
-                originalString = newString
+                originalString = request.stringToModify,
+                modifiedString = newString
             };
 
             return response;

@@ -63,9 +63,9 @@ namespace StatTests
 
             //act
             response = thesaurus.ProcessRequest(request, testData);
-
+            
             //assert
-            Assert.AreEqual("That was alright.", response.modifiedString);
+            Assert.AreEqual("that was alright.", response.modifiedString);
 
         }
 
@@ -79,7 +79,7 @@ namespace StatTests
             response = thesaurus.ProcessRequest(request, testData);
 
             //assert
-            Assert.AreEqual("This string rocks!",response.modifiedString);
+            Assert.AreEqual("this string rocks!", response.modifiedString);
 
         }
 
@@ -93,7 +93,7 @@ namespace StatTests
             response = thesaurus.ProcessRequest(request, testData);
 
             //assert
-            Assert.AreEqual("This test is alright, absolutely not crummy.", response.modifiedString);
+            Assert.AreEqual("this test is alright, absolutely not crummy.", response.modifiedString);
 
         }
 

@@ -17,7 +17,8 @@ namespace Example.Business
 
             FilterResponse response = new FilterResponse
             {
-                originalString = newString
+                originalString = request.stringToModify,
+                modifiedString = newString
             };
 
             return response;
@@ -30,7 +31,8 @@ namespace Example.Business
 
             FilterResponse response = new FilterResponse
             {
-                originalString = newString
+                originalString = request.stringToModify,
+                modifiedString = newString
             };
 
             return response;

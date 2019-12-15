@@ -24,8 +24,8 @@ namespace StatTests
             response = new FilterResponse();
             filter = new Filter();
             testData = new LinkedList<string[]>();
-            testData.AddLast(new string[] { "d[._\\-,\\\\/* ]*[u* ][._\\-,\\\\/* ]*[c* ][._\\-,\\\\/* ]*k", "yuck", "yuck", "yuck", "yuck" });
-            testData.AddLast(new string[] { "s[._\\-,\\\\/* ]*[n* ][._\\-,\\\\/* ]*[i* ][._\\-,\\\\/*]*[t* ][._\\-,\\\\/* ]*[c* ][._\\-,\\\\/*]*hs", "lich", "lich", "lich", "lich" });
+            testData.AddLast(new string[] { "d[\\s\\.-]*[u* ][\\s\\.-]*[c* ][\\s\\.-]*k", "yuck", "yuck", "yuck", "yuck" });
+            testData.AddLast(new string[] { "s[\\s\\.-]*[n* ][\\s\\.-]*[i* ][\\s\\.-]*[t* ][\\s\\.-]*[c* ][\\s\\.-]*h", "lich", "lich", "lich", "lich" });
         }
 
         [Test]
@@ -65,7 +65,8 @@ namespace StatTests
             response = filter.ProcessRequest(request,  testData);
 
             //assert
-            Assert.AreEqual("That's a yuck.", response.modifiedString);
+            Console.WriteLine(response.modifiedString);
+            Assert.AreEqual("that's a yuck.", response.modifiedString);
 
         }
 
@@ -79,7 +80,7 @@ namespace StatTests
             response = filter.ProcessRequest(request, testData);
 
             //assert
-            Assert.AreEqual("This is a safe string.", response.modifiedString);
+            Assert.AreEqual("this is a safe string.", response.modifiedString);
 
         }
 
@@ -93,7 +94,7 @@ namespace StatTests
             response = filter.ProcessRequest(request, testData);
 
             //assert
-            Assert.AreEqual("What, the yuck? You lich.", response.modifiedString);
+            Assert.AreEqual("what, the yuck? you lich.", response.modifiedString);
 
         }
 

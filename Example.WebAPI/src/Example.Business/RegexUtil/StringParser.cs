@@ -17,19 +17,18 @@ namespace Example.Business.RegexUtil
 
         public static String generateNewString(String inputString, LinkedList<string[]> stringTable)
         {
-            Regex regex;
             Random random = new Random();
 
-            string outputString = inputString.ToLower();
+            string outputString;
+            outputString = inputString.ToLower();
             int randomNumber = 1;
 
             foreach (string[] stringArray in stringTable)
             {
-                regex = new Regex(stringArray[0]);
-                while (regex.IsMatch("(?s).*" + stringArray[0] + ".*"))
+                while ((Regex.Matches(outputString, ".*" + stringArray[0] + ".*")).Count > 0)
                 {
-                    randomNumber = random.Next(4);
-                    regex.Replace(outputString, stringArray[randomNumber], 1, 0);
+                    randomNumber = random.Next(4) + 1;
+                    outputString = Regex.Replace(outputString, stringArray[0], stringArray[randomNumber]);
                 }
             }
 
