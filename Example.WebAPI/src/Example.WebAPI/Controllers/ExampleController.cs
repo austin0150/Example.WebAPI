@@ -79,11 +79,8 @@ namespace Example.WebAPI.Controllers
                 //_bin.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                //Persist word/char stats
-                for (int i = 0; i < words.Length; i++)
-                {
-                    _DB.AddUsedWord(words[i]);
-                }
+                Thread thread1 = new Thread(()=>ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
 
                 binResonse = _bin.ProccessRequest(request);
             }
