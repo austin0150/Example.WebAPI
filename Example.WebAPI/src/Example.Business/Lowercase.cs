@@ -11,17 +11,7 @@ namespace Example.Business {
             LowercaseResponse response = new LowercaseResponse();
             HelperFunctions helper = new HelperFunctions();
 
-            DBInteraction interaction = new DBInteraction();
             String changeString = request.stringToModify;
-
-            // //Store database Metrics
-            // String[] dbArray = changeString.Split(".");
-            // foreach (String sentence in dbArray) {
-            //     String[] word = sentence.Split(" ");
-            //     foreach (String wordVal in word) {
-            //         interaction.AddUsedWord(wordVal.ToLower());
-            //     }
-            // }
 
             if (request.firstCharOnly) {
                 int count = 0;

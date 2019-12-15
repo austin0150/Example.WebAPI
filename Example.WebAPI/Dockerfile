@@ -20,4 +20,4 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Example.WebAPI.dll"]
 #Used to copy the database config to the container
-COPY ./src/Example.DataAccess/apidb.dbcfg /app/
+COPY ./src/Example.WebAPI/apidb.dbcfg /app/

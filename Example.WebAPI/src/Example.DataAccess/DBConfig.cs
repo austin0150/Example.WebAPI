@@ -46,7 +46,6 @@ namespace Example.DataAccess
             }
 
             result = "Data Source = " + dataSource + "; Initial Catalog = " + init + "; User ID = " + user + "; Password = " + pass;
-            Console.WriteLine(result);
             return result;
         }
     }
