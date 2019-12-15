@@ -44,11 +44,11 @@ namespace Example.WebAPI.Controllers
                 _cap.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                // //Persist word/char stats
-                // for (int i = 0; i < words.Length; i++)
-                // {
-                //     _DB.AddUsedWord(words[i]);
-                // }
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
                 Thread thread1 = new Thread(()=>ControllerHelperFunctions.databaseWordTransaction(words, _DB));
                 thread1.Start();
                 
@@ -106,12 +106,12 @@ namespace Example.WebAPI.Controllers
                 _low.ValidateRequest(lowercaseRequest);
                 string[] words = lowercaseRequest.stringToModify.Split(' ');
 
-                // //Persist word/char stats
-                // for (int i = 0; i < words.Length; i++)
-                // {
-                //     ThreadStart thread1 = delegate {_DB.AddUsedWord(words[i]); };
-                //     //_DB.AddUsedWord(words[i]);
-                // }
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    ThreadStart thread1 = delegate {_DB.AddUsedWord(words[i]); };
+                    //_DB.AddUsedWord(words[i]);
+                }
                 Thread thread1 = new Thread(()=>ControllerHelperFunctions.databaseWordTransaction(words, _DB));
                 thread1.Start();
 
@@ -136,11 +136,11 @@ namespace Example.WebAPI.Controllers
                 _filter.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                // //Persist word/char stats
-                // for (int i = 0; i < words.Length; i++)
-                // {
-                //     _DB.AddUsedWord(words[i]);
-                // }
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
                 Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
                 thread1.Start();
 
@@ -166,11 +166,11 @@ namespace Example.WebAPI.Controllers
                 _thesaurus.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                // //Persist word/char stats
-                // for (int i = 0; i < words.Length; i++)
-                // {
-                //     _DB.AddUsedWord(words[i]);
-                // }
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
                 Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
                 thread1.Start();
 
