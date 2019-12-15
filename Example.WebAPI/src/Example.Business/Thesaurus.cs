@@ -14,7 +14,7 @@ namespace Example.Business
         public ThesaurusResponse ProcessRequest(ThesaurusRequest request)
         {
 
-            string newString = StringParser.generateNewString(request.stringToModify, "thesaurus");
+            string newString = StringParser.generateNewString(request.stringToModify, "THESAURUS");
 
             ThesaurusResponse response = new ThesaurusResponse
             {

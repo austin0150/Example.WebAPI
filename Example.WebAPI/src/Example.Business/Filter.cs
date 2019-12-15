@@ -13,7 +13,7 @@ namespace Example.Business
         public FilterResponse ProcessRequest(FilterRequest request)
         {
 
-            string newString = StringParser.generateNewString(request.stringToModify, "filter");
+            string newString = StringParser.generateNewString(request.stringToModify, "FILTER");
 
             FilterResponse response = new FilterResponse
             {

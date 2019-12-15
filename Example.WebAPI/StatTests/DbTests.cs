@@ -89,7 +89,7 @@ namespace StatTests
             int actualStringArrays;
 
             //Act
-            actualStringArrays = db.GetTable("thesaurus").Count;
+            actualStringArrays = db.GetTable("THESAURUS").Count;
 
             //Assert
             Assert.That(expectedStringArrays == actualStringArrays);
@@ -104,10 +104,70 @@ namespace StatTests
             int actualStringArrays;
 
             //Act
-            actualStringArrays = db.GetTable("filter").Count;
+            actualStringArrays = db.GetTable("FILTER").Count;
 
             //Assert
             Assert.That(expectedStringArrays == actualStringArrays);
+
+        }
+
+        [Test]
+        public void GetThesaurusTableBad()
+        {
+            //Arrange
+            int expectedStringArrays = 10;
+            int actualStringArrays;
+
+            //Act
+            actualStringArrays = db.GetTable("THESAURUS").Count;
+
+            //Assert
+            Assert.That(expectedStringArrays != actualStringArrays);
+
+        }
+
+        [Test]
+        public void GetFilterTableBad()
+        {
+            //Arrange
+            int expectedStringArrays = 11;
+            int actualStringArrays;
+
+            //Act
+            actualStringArrays = db.GetTable("FILTER").Count;
+
+            //Assert
+            Assert.That(expectedStringArrays != actualStringArrays);
+
+        }
+
+        [Test]
+        public void ValidateFilterData()
+        {
+            //Arrange
+            string expectedString = "yuck";
+            string actualString;
+
+            //Act
+            actualString = db.GetTable("FILTER").First.Value[1];
+
+            //Assert
+            Assert.That(expectedString == actualString);
+
+        }
+
+        [Test]
+        public void ValidateThesaurusData()
+        {
+            //Arrange
+            string expectedString = "crummy";
+            string actualString;
+
+            //Act
+            actualString = db.GetTable("THESAURUS").First.Value[1];
+
+            //Assert
+            Assert.That(expectedString == actualString);
 
         }
     }

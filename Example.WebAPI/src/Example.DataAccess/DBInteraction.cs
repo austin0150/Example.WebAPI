@@ -164,10 +164,16 @@ namespace Example.DataAccess
             {
                 reader.Read();
 
-                outputString.AddLast(new string[]{reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)});
-
-                sqlConn.Close();
+                try
+                {
+                    outputString.AddLast(new string[] { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3) });
+                } catch (Exception e)
+                {
+                    break;
+                }
             }
+
+            sqlConn.Close();
 
             return outputString;
         }
