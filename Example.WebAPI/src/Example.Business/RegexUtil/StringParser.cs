@@ -12,7 +12,7 @@ namespace Example.Business.RegexUtil
         {
             DBInteraction dbi = new DBInteraction();
 
-            return generateNewString(inputString, dbi.GetTable("tableName"));
+            return generateNewString(inputString, dbi.GetTable(tableName));
         }
 
         public static String generateNewString(String inputString, LinkedList<string[]> stringTable)

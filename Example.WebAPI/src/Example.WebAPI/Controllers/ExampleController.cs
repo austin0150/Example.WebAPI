@@ -27,12 +27,19 @@ namespace Example.WebAPI.Controllers
 
         ControllerHelperFunctions helper;
 
-        public ExampleController(ICapitalize cap, DBInteraction db, ILowercase low, IBinary bin)
+        public ExampleController(ICapitalize cap, 
+            DBInteraction db, 
+            ILowercase low, 
+            IBinary bin, 
+            IFilter fil,
+            IThesaurus thesaurus)
         {
             _cap = cap;
             _DB = db;
             _low = low;
             _bin = bin;
+            _filter = fil;
+            _thesaurus = thesaurus;
         }
 
         // public ExampleController(IBinary bin, DBInteraction db)
@@ -199,11 +206,6 @@ namespace Example.WebAPI.Controllers
                 _thesaurus.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                // //Persist word/char stats
-                // for (int i = 0; i < words.Length; i++)
-                // {
-                //     _DB.AddUsedWord(words[i]);
-                // }
                 Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
                 thread1.Start();
 

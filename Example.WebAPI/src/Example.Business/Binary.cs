@@ -21,20 +21,23 @@ namespace Example.Business
                 Array.Reverse(btText);
             System.Collections.BitArray bit = new System.Collections.BitArray(btText);
 
+                String responseString = "";
                 for (int i = bit.Length - 1; i >= 0; i--)
                 {
                     if (bit[i] == true)
                     {
-                        response.ModifiedString(1);
-                 
+                        //response.ModifiedString(1);
+                        responseString += "1";
                     }
                     else
                     {
-                        response.ModifiedString(0);
-                       
+                        //response.ModifiedString(0);
+                        responseString += "0";
                     }
                     
                 }
+
+                response.modifiedString = responseString;
 
             return response;
             }

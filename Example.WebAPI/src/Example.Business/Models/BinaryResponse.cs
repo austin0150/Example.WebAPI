@@ -9,10 +9,9 @@ namespace Example.Business.Models
         public string modifiedString { get; set; }
         public string originalString { get; set; }
 
-
         internal void ModifiedString(int v)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
