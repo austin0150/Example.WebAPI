@@ -18,6 +18,7 @@ namespace Example.WebAPI.Controllers
     [ApiController]
     public class ExampleController : ControllerBase
     {
+        IBinary _bin;
         ICapitalize _cap;
         DBInteraction _DB;
         ILowercase _low;
@@ -26,12 +27,26 @@ namespace Example.WebAPI.Controllers
 
         ControllerHelperFunctions helper;
 
-        public ExampleController(ICapitalize cap, DBInteraction db, ILowercase low)
+        public ExampleController(ICapitalize cap, 
+            DBInteraction db, 
+            ILowercase low, 
+            IBinary bin, 
+            IFilter fil,
+            IThesaurus thesaurus)
         {
             _cap = cap;
             _DB = db;
             _low = low;
+            _bin = bin;
+            _filter = fil;
+            _thesaurus = thesaurus;
         }
+
+        // public ExampleController(IBinary bin, DBInteraction db)
+        // {
+        //     _bin = bin;
+        //     _DB = db;
+        // }
 
         [HttpGet]
         [Route("Capitalize")]
@@ -61,6 +76,31 @@ namespace Example.WebAPI.Controllers
 
             return StatusCode(200, capResonse);
             
+        }
+
+        [HttpGet]
+        [Route("Binary")]
+        public IActionResult BinaryControl([FromBody] BinaryRequest request)
+        {
+            BinaryResponse binResonse;
+
+            try
+            {
+                //_bin.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                Thread thread1 = new Thread(()=>ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
+                binResonse = _bin.ProccessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, binResonse);
+
         }
 
         [HttpGet]
@@ -166,11 +206,6 @@ namespace Example.WebAPI.Controllers
                 _thesaurus.ValidateRequest(request);
                 string[] words = request.stringToModify.Split(' ');
 
-                // //Persist word/char stats
-                // for (int i = 0; i < words.Length; i++)
-                // {
-                //     _DB.AddUsedWord(words[i]);
-                // }
                 Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
                 thread1.Start();
 
