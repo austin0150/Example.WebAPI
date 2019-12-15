@@ -21,6 +21,8 @@ namespace Example.WebAPI.Controllers
         ICapitalize _cap;
         DBInteraction _DB;
         ILowercase _low;
+        IFilter _filter;
+        IThesaurus _thesaurus;
 
         ControllerHelperFunctions helper;
 
@@ -121,6 +123,66 @@ namespace Example.WebAPI.Controllers
             }
 
             return StatusCode(200, lowResponse);
+        }
+
+        [HttpGet]
+        [Route("Filter")]
+        public IActionResult FilterControl([FromBody] FilterRequest request)
+        {
+            FilterResponse filterResonse;
+
+            try
+            {
+                _filter.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                // //Persist word/char stats
+                // for (int i = 0; i < words.Length; i++)
+                // {
+                //     _DB.AddUsedWord(words[i]);
+                // }
+                Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
+                filterResonse = _filter.ProcessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, filterResonse);
+
+        }
+
+        [HttpGet]
+        [Route("Thesaurus")]
+        public IActionResult ThesaurusControl([FromBody] ThesaurusRequest request)
+        {
+            ThesaurusResponse thesaurusResonse;
+
+            try
+            {
+                _thesaurus.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                // //Persist word/char stats
+                // for (int i = 0; i < words.Length; i++)
+                // {
+                //     _DB.AddUsedWord(words[i]);
+                // }
+                Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
+                thesaurusResonse = _thesaurus.ProcessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, thesaurusResonse);
+
         }
 
     }

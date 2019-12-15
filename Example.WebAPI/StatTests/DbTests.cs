@@ -80,5 +80,35 @@ namespace StatTests
             Assert.That(newAmt == (oldAmt + 1));
 
         }
+
+        [Test]
+        public void GetThesaurusTableGood()
+        {
+            //Arrange
+            int expectedStringArrays = 4;
+            int actualStringArrays;
+
+            //Act
+            actualStringArrays = db.GetTable("thesaurus").Count;
+
+            //Assert
+            Assert.That(expectedStringArrays == actualStringArrays);
+
+        }
+
+        [Test]
+        public void GetFilterTableGood()
+        {
+            //Arrange
+            int expectedStringArrays = 2;
+            int actualStringArrays;
+
+            //Act
+            actualStringArrays = db.GetTable("filter").Count;
+
+            //Assert
+            Assert.That(expectedStringArrays == actualStringArrays);
+
+        }
     }
 }

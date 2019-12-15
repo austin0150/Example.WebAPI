@@ -148,7 +148,7 @@ namespace Example.DataAccess
             }
         }
 
-        public LinkedList<string[]> getTable(string tableName)
+        public LinkedList<string[]> GetTable(string tableName)
         {
             LinkedList<string[]> outputString = new LinkedList<string[]>();
 

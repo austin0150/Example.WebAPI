@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Example.Business.Interfaces
 {
-    interface IFilter
+    public interface IFilter
     {
         FilterResponse ProcessRequest(FilterRequest request);
         void ValidateRequest(FilterRequest request);
