@@ -17,12 +17,19 @@ namespace Example.WebAPI.Controllers
     [ApiController]
     public class ExampleController : ControllerBase
     {
+        IBinary _bin;
         ICapitalize _cap;
         DBInteraction _DB;
 
         public ExampleController(ICapitalize cap, DBInteraction db)
         {
             _cap = cap;
+            _DB = db;
+        }
+
+        public ExampleController(IBinary bin, DBInteraction db)
+        {
+            _bin = bin;
             _DB = db;
         }
 
@@ -52,6 +59,34 @@ namespace Example.WebAPI.Controllers
 
             return StatusCode(200, capResonse);
             
+        }
+
+        [HttpGet]
+        [Route("Binary")]
+        public IActionResult BinaryControl([FromBody] BinaryRequest request)
+        {
+            BinaryResponse binResonse;
+
+            try
+            {
+                //_bin.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
+
+                binResonse = _bin.ProccessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, binResonse);
+
         }
 
         [HttpGet]
