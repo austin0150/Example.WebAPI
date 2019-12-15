@@ -35,6 +35,12 @@ namespace Example.WebAPI.Controllers
             _DB = db;
         }
 
+        public ExampleController(IBinary bin, DBInteraction db)
+        {
+            _bin = bin;
+            _DB = db;
+        }
+
         [HttpGet]
         [Route("Capitalize")]
         public IActionResult CapitalizeControl ([FromBody] CapitalizeRequest request)
@@ -66,6 +72,37 @@ namespace Example.WebAPI.Controllers
         [HttpGet]
         [Route("Binary")]
         public IActionResult BinaryControl([FromBody] BinaryRequest request)
+<<<<<<< Updated upstream
+=======
+        {
+            BinaryResponse binResonse;
+
+            try
+            {
+                //_bin.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                //Persist word/char stats
+                for (int i = 0; i < words.Length; i++)
+                {
+                    _DB.AddUsedWord(words[i]);
+                }
+
+                binResonse = _bin.ProccessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, binResonse);
+
+        }
+
+        [HttpGet]
+        [Route("CharStat")]
+        public IActionResult CharStatControl([FromBody] char character)
+>>>>>>> Stashed changes
         {
             BinaryResponse binResonse;
 
