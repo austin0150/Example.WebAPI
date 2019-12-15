@@ -147,5 +147,35 @@ namespace Example.DataAccess
                 return 0;
             }
         }
+
+        public LinkedList<string[]> GetTable(string tableName)
+        {
+            LinkedList<string[]> outputString = new LinkedList<string[]>();
+
+            string queryString = "SELECT * FROM " + tableName;
+            SqlConnection sqlConn = ConnectToDB();
+            SqlCommand command = new SqlCommand(queryString, sqlConn);
+
+            sqlConn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.HasRows)
+            {
+                reader.Read();
+
+                try
+                {
+                    outputString.AddLast(new string[] { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3) });
+                } catch (Exception e)
+                {
+                    break;
+                }
+            }
+
+            sqlConn.Close();
+
+            return outputString;
+        }
     }
 }
