@@ -95,30 +95,6 @@ namespace Example.WebAPI.Controllers
 
         }
 
-        [HttpGet]
-        [Route("Ascii")]
-        public IActionResult AsciiControl([FromBody] AsciiRequest request)
-        {
-            AsciiResponse asciiResponse;
-
-            try
-            {
-                //_bin.ValidateRequest(request);
-                string[] words = request.stringToModify.Split(' ');
-
-                Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
-                thread1.Start();
-
-                asciiResponse = _ascii.ProccessRequest(request);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-
-            return StatusCode(200, asciiResponse);
-
-        }
 
         [HttpGet]
         [Route("CharStat")]
@@ -223,6 +199,31 @@ namespace Example.WebAPI.Controllers
             }
 
             return StatusCode(200, thesaurusResonse);
+
+        }
+
+        [HttpGet]
+        [Route("Ascii")]
+        public IActionResult AsciiControl([FromBody] AsciiRequest request)
+        {
+            AsciiResponse asciiResponse;
+
+            try
+            {
+                //_bin.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
+                asciiResponse = _ascii.ProccessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, asciiResponse);
 
         }
 
