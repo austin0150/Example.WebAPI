@@ -37,6 +37,7 @@ namespace Example.WebAPI
             services.AddSingleton<IThesaurus, Thesaurus>();
             services.AddSingleton<IFilter, Filter>();
             services.AddSingleton<IAscii, Ascii>();
+            services.AddSingleton<IHex, Hex>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
