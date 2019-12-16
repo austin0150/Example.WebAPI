@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Example.DataAccess
 {
@@ -13,7 +14,15 @@ namespace Example.DataAccess
         {
             connString = DBConfig.ParseConfigFile("apidb");
         }
+    
+        String replaceSpecialChar(string word) {
+            return Regex.Replace(word, @"[^0-9a-zA-Z]+", ""); 
+        }
 
+        bool checkSpecialChar(string character) {
+            Regex regExpression = new Regex(@"^\w+$");
+            return regExpression.IsMatch(character);
+        }
         public void AddUsedWord(string word)
         {
             //Convert everything to uppercase first
@@ -29,10 +38,12 @@ namespace Example.DataAccess
 
             if(preCount > 0)
             {
+                word = replaceSpecialChar(word);
                 cmdString = "UPDATE WORD_USE SET USES = " + (preCount + 1) + " WHERE WORD = \'" + word +"\';";
             }
             else
             {
+                word = replaceSpecialChar(word);
                 cmdString = "INSERT INTO WORD_USE (WORD, USES) VALUES (\'" + word + "\', 1)";
             }
 
@@ -52,7 +63,7 @@ namespace Example.DataAccess
         {
             int preCount = GetCharUse(character) ;
             string cmdString = "";
-
+            if (checkSpecialChar(character.ToString())) { //Convert to a string in order to allow the Regex to do its thing
             if (preCount > 0)
             {
                 cmdString = "UPDATE CHAR_USE SET USES = " + (preCount + 1) + " WHERE LETTER = \'" + character + "\';";
@@ -72,6 +83,10 @@ namespace Example.DataAccess
 
             conn.Close();
             return;
+            }
+            else {
+                return;
+            }
  
         }
 
@@ -94,7 +109,7 @@ namespace Example.DataAccess
         {
             //convert to upper case
             word = word.ToUpper();
-
+            word = replaceSpecialChar(word);
             string queryString = "SELECT USES FROM WORD_USE WHERE WORD = \'" + word + "\';";
             SqlConnection sqlConn = ConnectToDB();
             SqlCommand command = new SqlCommand(queryString, sqlConn);
@@ -123,6 +138,7 @@ namespace Example.DataAccess
         public int GetCharUse(char character)
         {
             character = char.ToUpper(character);
+            if (checkSpecialChar(character.ToString())) { //Convert to a string in order to allow the Regex to do its thing
             string queryString = "SELECT USES FROM CHAR_USE WHERE Letter = \'" + character + "\';";
             SqlConnection sqlConn = ConnectToDB();
             SqlCommand command = new SqlCommand(queryString, sqlConn);
@@ -144,6 +160,10 @@ namespace Example.DataAccess
             else
             {
                 sqlConn.Close();
+                return 0;
+            }
+            }
+            else {
                 return 0;
             }
         }
