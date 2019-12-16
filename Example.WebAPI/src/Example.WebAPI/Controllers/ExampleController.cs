@@ -19,6 +19,7 @@ namespace Example.WebAPI.Controllers
     public class ExampleController : ControllerBase
     {
         IBinary _bin;
+        IAscii _ascii;
         ICapitalize _cap;
         DBInteraction _DB;
         ILowercase _low;
@@ -28,10 +29,11 @@ namespace Example.WebAPI.Controllers
 
         ControllerHelperFunctions helper;
 
-        public ExampleController(ICapitalize cap, 
-            DBInteraction db, 
-            ILowercase low, 
-            IBinary bin, 
+        public ExampleController(ICapitalize cap,
+            DBInteraction db,
+            ILowercase low,
+            IBinary bin,
+            IAscii ascii,
             IFilter fil,
             IThesaurus thesaurus,
             IHex hex)
@@ -40,6 +42,7 @@ namespace Example.WebAPI.Controllers
             _DB = db;
             _low = low;
             _bin = bin;
+            _ascii = ascii;
             _filter = fil;
             _thesaurus = thesaurus;
             _hex = hex;
@@ -94,6 +97,7 @@ namespace Example.WebAPI.Controllers
             return StatusCode(200, binResonse);
 
         }
+
 
         [HttpGet]
         [Route("Hex")]
@@ -222,6 +226,31 @@ namespace Example.WebAPI.Controllers
             }
 
             return StatusCode(200, thesaurusResonse);
+
+        }
+
+        [HttpGet]
+        [Route("Ascii")]
+        public IActionResult AsciiControl([FromBody] AsciiRequest request)
+        {
+            AsciiResponse asciiResponse;
+
+            try
+            {
+                //_bin.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
+                asciiResponse = _ascii.ProccessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, asciiResponse);
 
         }
 

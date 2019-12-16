@@ -36,6 +36,7 @@ namespace Example.WebAPI
             services.AddSingleton<IBinary, Binary>();
             services.AddSingleton<IThesaurus, Thesaurus>();
             services.AddSingleton<IFilter, Filter>();
+            services.AddSingleton<IAscii, Ascii>();
             services.AddSingleton<IHex, Hex>();
         }
 
