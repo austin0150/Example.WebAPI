@@ -24,6 +24,7 @@ namespace Example.WebAPI.Controllers
         ILowercase _low;
         IFilter _filter;
         IThesaurus _thesaurus;
+        IHex _hex;
 
         ControllerHelperFunctions helper;
 
@@ -32,7 +33,8 @@ namespace Example.WebAPI.Controllers
             ILowercase low, 
             IBinary bin, 
             IFilter fil,
-            IThesaurus thesaurus)
+            IThesaurus thesaurus,
+            IHex hex)
         {
             _cap = cap;
             _DB = db;
@@ -40,6 +42,7 @@ namespace Example.WebAPI.Controllers
             _bin = bin;
             _filter = fil;
             _thesaurus = thesaurus;
+            _hex = hex;
         }
 
         [HttpGet]
@@ -90,6 +93,30 @@ namespace Example.WebAPI.Controllers
 
             return StatusCode(200, binResonse);
 
+        }
+
+        [HttpGet]
+        [Route("Hex")]
+        public IActionResult HexControl([FromBody] HexRequest request)
+        {
+            HexResponse hexResonse;
+
+            try
+            {
+                //_bin.ValidateRequest(request);
+                string[] words = request.stringToModify.Split(' ');
+
+                Thread thread1 = new Thread(() => ControllerHelperFunctions.databaseWordTransaction(words, _DB));
+                thread1.Start();
+
+                hexResonse = _hex.ProccessRequest(request);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200, hexResonse);
         }
 
         [HttpGet]
