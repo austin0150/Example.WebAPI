@@ -10,19 +10,18 @@ namespace Example.Business
     {
         public AsciiResponse ProccessRequest(AsciiRequest request)
         {
-            AsciiResponse response = new AsciiResponse();
-            response.originalString = request.stringToModify;
-            string stringInProgress = request.stringToModify;
-            String responseString = "";
+            string original = request.stringToModify;
 
-    
-            byte[] arr = Encoding.ASCII.GetBytes(stringInProgress);
-
-            foreach (byte bit in arr)
+            char[] chars = original.ToCharArray();
+            string finalOut = "";
+            foreach (char conversion in chars)
             {
-                responseString += (" {0} ", bit, (char)bit);
+                finalOut = finalOut + (Convert.ToInt32(conversion)) + " ";
             }
-            response.modifiedString = responseString;
+
+            AsciiResponse response = new AsciiResponse();
+            response.originalString = original;
+            response.modifiedString = finalOut;
 
             return response;
         }
