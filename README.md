@@ -1,22 +1,14 @@
 # ExampleWebAPI
 
-## Just a basic example of an ASP .NET Core Web API
-### I just wanted to make something like this for my own practice.
+## Just a basic example of an ASP .NET Core Web API  
+### I initially made this as practice for myself, but found it usefull to use for a university group project  
+
+### Runs on ASP Net Core 2.2 and Can be run in a docker container
+
+### Once you run the service, you can test it out using postman
+### Get Postman here : https://www.getpostman.com/
 
 ### Please reference the API documentation for info on all the API functions here...
 ### https://documenter.getpostman.com/view/9459391/SW7Uaphp?version=latest
 
-### Runs on ASP Net Core 2.2 and Can be run in a docker container (Once I set that up) 
-
-### Once you run the service, you can test it out using postman
-### Get Postman here : https://www.getpostman.com/
-### Send a GET to this url "https://localhost:44346/Capitalize" (You may need to change the port in the url if this doesn't work for you)
-### Add this to your request body...
-    {
-	    "stringToModify" : " this is a string   ",
-        "trimTrailingWhiteSpace" : true,
-        "trimPrecedingWhiteSpace" : true,
-        "firstCharOnly" : true
-    }
-### Make sure the content type you are sending is JSON(application/json)
 
