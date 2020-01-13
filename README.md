@@ -9,12 +9,12 @@
 ## Data Persistence
 The web service requires the use of an SQL database to store character and word use.  
 Schema:  
-WORD_USE  
-	WORD : VARCHAR(50)  
-	USES : INT(10)
-CHAR_USE  
-	LETTER : VARCHAR(50)  
-	USES : INT(10)
+* WORD_USE  
+  * WORD : VARCHAR(50)  
+  * USES : INT(10)  
+* CHAR_USE  
+  * LETTER : VARCHAR(50)  
+  * USES : INT(10)
 ### Once you run the service, you can test it out using postman
 ### Get Postman here : https://www.getpostman.com/
 ### Send a GET to this url "https://localhost:44346/Capitalize" (You may need to change the port in the url if this doesn't work for you)
