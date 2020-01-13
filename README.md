@@ -1,10 +1,21 @@
 # ExampleWebAPI
 
-## Just a basic example of an ASP .NET Core Web API  
-### I initially made this as practice for myself, but found it usefull to use for a university group project  
+## Just a basic example of an ASP .NET Core Web API
+### This project started as a way to learn more about web services, but became the focus of a class project.
 
-### Runs on ASP Net Core 2.2 and Can be run in a docker container
+### Please reference the API documentation for info on all the API functions here...
+### https://documenter.getpostman.com/view/9459391/SW7Uaphp?version=latest
 
+## Data Persistence
+The web service requires the use of an SQL database to store character and word use.  
+Schema:  
+* WORD_USE  
+  * WORD : VARCHAR(50)  
+  * USES : INT(10)  
+* CHAR_USE  
+  * LETTER : VARCHAR(50)  
+  * USES : INT(10)  
+  
 ### Once you run the service, you can test it out using postman
 ### Get Postman here : https://www.getpostman.com/
 
