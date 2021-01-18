@@ -1,6 +1,6 @@
 # ExampleWebAPI
 
-## Just a basic example of an ASP .NET Core Web API
+## Just a basic example of a .NET Core Web API
 ### This project started as a way to learn more about web services, but became the focus of a class project.
 
 ### Please reference the API documentation for info on all the API functions here...
